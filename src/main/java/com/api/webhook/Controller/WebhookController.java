@@ -22,7 +22,7 @@ public class WebhookController {
 	}
 	
 	/*------------------------ GET ------------------------ */
-	@GetMapping("/webhook")
+	@GetMapping("/webhooks")
 	public ResponseEntity<String> getRequest(@RequestParam String hub_mode,@RequestParam String hub_challenge,@RequestParam String hub_verify_token) {
 		String mode=hub_mode;
 		String challange=hub_challenge;
