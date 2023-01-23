@@ -5,19 +5,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/webhook")
 public class WebhookController {
 	
 	@Value("${auth.token}")
 	private String authToken;
 	
-	@GetMapping()
+	/*------------------------ Default ------------------------ */
+	@GetMapping("/")
+	public ResponseEntity<String> test(){
+		return ResponseEntity.status(HttpStatus.OK).body("API working fine");
+	}
+	
+	/*------------------------ GET ------------------------ */
+	@GetMapping("/webhook")
 	public ResponseEntity<String> getRequest(@RequestParam String hub_mode,@RequestParam String hub_challenge,@RequestParam String hub_verify_token) {
 		String mode=hub_mode;
 		String challange=hub_challenge;
