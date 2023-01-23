@@ -23,9 +23,9 @@ public class WebhookController {
 	
 	/*------------------------ GET ------------------------ */
 	@GetMapping("/webhooks")
-	public ResponseEntity<String> getRequest(@RequestParam String hub_mode,@RequestParam String hub_challenge,@RequestParam String hub_verify_token) {
+	public ResponseEntity<Integer> getRequest(@RequestParam String hub_mode, @RequestParam int hub_challenge, @RequestParam String hub_verify_token) {
 		String mode=hub_mode;
-		String challange=hub_challenge;
+		int challange=hub_challenge;
 		String token=hub_verify_token;
 		
 		System.out.println("hub_mode: "+mode);
