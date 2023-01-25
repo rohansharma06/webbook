@@ -1,8 +1,9 @@
 package com.api.webhook.Controller;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,8 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+
+/*
+ * @Author Rohan_Sharma
+*/
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -58,9 +64,11 @@ public class WebhookController {
 	/*------------------------ POST ------------------------ */
 	@PostMapping("/webhooks")
 	public ResponseEntity<String> postRequest(@RequestBody String jsonStringReq) {
-//		JSONObject json = gson.fromJson(jsonStringReq, JSONObject.class);
-//		System.out.println(json);
-		System.out.println(jsonStringReq);
+		System.out.println("body:"+jsonStringReq);
+		String api= "http://34.214.61.86:6006/webhooks";
+		HttpEntity<String> entity = new HttpEntity<String>(jsonStringReq);
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.exchange(api, HttpMethod.POST, entity,Object.class);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 }
