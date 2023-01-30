@@ -64,7 +64,7 @@ public class WebhookController {
 	/*------------------------ POST ------------------------ */
 	@PostMapping("/webhooks")
 	public ResponseEntity<String> postRequest(@RequestBody String jsonStringReq) {
-		System.out.println("body:"+jsonStringReq);
+		System.out.println("body:"+gson.toJson(jsonStringReq));
 		String api= "http://34.214.61.86:6006/webhooks";
 		HttpEntity<String> entity = new HttpEntity<String>(jsonStringReq);
 		RestTemplate restTemplate = new RestTemplate();
